@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu Item</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #4CAF50, #2196F3);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-form {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: calc(100% - 22px); /* Adjusted width to account for padding and border */
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding and border are included in width calculation */
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: calc(100% - 10px);
+            background-position-y: center;
+        }
+
+        textarea {
+            height: 100px; /* Fixed height for the description box */
+            resize: none; /* Disable resizing */
+            width: calc(100% - 22px); /* Adjusted width to account for padding and border */
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding and border are included in width calculation */
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<form id="menuItemForm" enctype="multipart/form-data" class="menu-form">
+    <div class="form-group">
+        <label for="itemName">Name of the Item:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+    <!-- Hidden input field for restaurantName with dynamic value -->
+    <input type="hidden" id="restaurantName" name="restaurantName" required>
+    <div class="form-group">
+        <label for="menuType">Menu Type:</label>
+        <select id="menu_type" name="menu_type" class="form-control" required>
+            <option value="Veg">Vegetarian</option>
+            <option value="Non-Veg">Non-Vegetarian</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="price">Price (INR):</label>
+        <input type="number" id="price" name="price" min="0" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" class="form-control-file" required>
+    </div>
+    <button type="button" onclick="submitFormData()" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    function displayUserEmail() {
+        var userEmail = sessionStorage.getItem('userEmail');
+        if (userEmail) {
+            var emailParts = userEmail.split('@'); // Split the email at '@'
+            if (emailParts.length > 0) {
+                console.log(emailParts[0])
+                return emailParts[0];
+            } else {
+                return userEmail;
+            }
+        } else {
+            return "";
+        }
+    }
+
+    // Function to submit form data
+    function submitFormData() {
+        var form = document.getElementById('menuItemForm');
+        var formData = new FormData(form);
+        formData.set('restaurantName', displayUserEmail()); // Set restaurantName dynamically
+
+        var requestOptions = {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData,
+            redirect: 'follow'
+        };
+        const apiURL = "http://13.232.207.85:8000/menu/"
+        fetch(apiURL, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+</script>
+
+</body>
+</html>

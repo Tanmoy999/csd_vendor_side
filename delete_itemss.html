@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Delete Restaurant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: linear-gradient(to bottom right, #4CAF50, #2196F3);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d32f2f;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Delete Item</h1>
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" placeholder="Enter item name">
+    <button id="deleteButton">Delete</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('deleteButton').addEventListener('click', function() {
+      var itemName = document.getElementById('itemName').value;
+      deleteItem(itemName);
+    });
+
+    function deleteItem(name) {
+      var myHeaders = new Headers();
+      myHeaders.append("name", name);
+
+      var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: '',
+        redirect: 'follow'
+      };
+      const apiUrl = 'http://13.232.207.85:8000/menu/';
+
+
+    function displayUserEmail() {
+  var userEmail = sessionStorage.getItem('userEmail');
+  if (userEmail) {
+    var emailParts = userEmail.split('@'); // Split the email at '@'
+    if (emailParts.length > 0) {
+        console.log(emailParts[0])
+        return emailParts[0];
+    //   document.getElementById('userEmail').innerText = emailParts[0]; // Set the part before '@'
+    } else {
+        return userEmail;
+    //   document.getElementById('userEmail').innerText = userEmail; // Display full email if '@' is not found
+    }
+  } else {
+    return "";
+    // console.error('User email not found in session storage');
+  }
+}
+
+      fetch('https://cors-anywhere.herokuapp.com/' + apiUrl +displayUserEmail()+'/'+ name, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result);
+          document.getElementById('result').innerText = result;
+        })
+        .catch(error => console.log('error', error));
+    }
+  </script>
+</body>
+</html>

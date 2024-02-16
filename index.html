@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Vendor</title>
+  <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 160px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        transition: border-color 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #6c5ce7;
+        color: #fff;
+        padding: 15px 0; /* Adjust padding */
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        margin: 0 5px;
+        width: 100%; /* Make button full width */
+        box-sizing: border-box;
+        font-size: 16px; /* Adjust font size */
+    }
+
+    button:hover {
+        background-color: #4834d4;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        text-align: left;
+    }
+
+    .navbar-collapse {
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    #logout {
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+
+
+<div class="navbar-collapse collapse"  >
+    <ul class="nav navbar-nav navbar-right">
+         <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
+    </ul>
+</div>
+</div>
+<br>
+<div class="container">	
+  <form name="registration_form" id="registration_form" method="post" action="#" enctype="multipart/form-data" >
+  <div class="row">
+
+	
+		<img src="data:image/png;base64,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">
+	</div>
+	<form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data" >
+	<div class="col-sm-4">
+		<div class="form-group">
+	      <label for="email">Email</label>
+		  <input type="text" name="login_email" id="login_email" class="form-control" placeholder="Enter your email">
+		</div>
+		
+		<div class="form-group">
+	      <label for="password">Password</label>
+		  <input type="password" name="login_password" id="login_password" class="form-control"  placeholder="Enter your password">
+		</div>
+		<button type="button" id="login" name="login" class="btn btn-success">Login</button>
+	</div><!-- end col -->
+	
+  </div><!--  end row -->		
+  </form>
+</div>
+<br>
+
+</body>
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+	  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+      apiKey: "AIzaSyBnKOmQh5jCATVHjjPfviMEMNC345kv2Uc",
+      authDomain: "fir-8012d.firebaseapp.com",
+      databaseURL: "https://fir-8012d-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "fir-8012d",
+      storageBucket: "fir-8012d.appspot.com",
+      messagingSenderId: "1037013411356",
+      appId: "1:1037013411356:web:288e130080ff378657e1d9",
+      measurementId: "G-D8TZHZ1ZX0" // Optional, if you have it
+    };
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	  const auth = getAuth();
+	  console.log(app);
+
+	  
+
+	  
+
+	  //----- Login code start	  
+	  document.getElementById("login").addEventListener("click", function() {
+		  var email =  document.getElementById("login_email").value;
+		  var password = document.getElementById("login_password").value;
+
+		  signInWithEmailAndPassword(auth, email, password)
+		  .then((userCredential) => {
+		    // Signed in 
+		    const user = userCredential.user;
+		    console.log(user);
+			console.log(user.email)
+		    alert(user.email+" Login successfully!!!");
+		    document.getElementById('logout').style.display = 'block';
+			sessionStorage.setItem('userEmail', user.email);
+            window.location.href = "index_page.html";
+		    // ...
+		  })
+		  .catch((error) => {
+		    const errorCode = error.code;
+  const errorMessage = error.message;
+  console.log("Error Code:", errorCode);
+  console.log("Error Message:", errorMessage);
+
+  if (errorCode === "auth/wrong-password") {
+    alert("Incorrect password. Please try again.");
+  } else {
+    // Handle other errors accordingly
+    alert(errorMessage);
+  }
+		  });		  		  
+	  });
+	  //----- End
+
+
+	  
+    // Function to handle user authentication state changes
+    
+
+    // Call the function on page load
+    handleAuthStateChange();
+
+
+	  //----- Logout code start	  
+	  document.getElementById("logout").addEventListener("click", function() {
+		  signOut(auth).then(() => {
+			  // Sign-out successful.
+			  console.log('Sign-out successful.');
+			  alert('Sign-out successful.');
+			  document.getElementById('logout').style.display = 'none';
+			}).catch((error) => {
+			  // An error happened.
+			  console.log('An error happened.');
+			});		  		  
+	  });
+	  //----- End
+
+	</script>
+</html>

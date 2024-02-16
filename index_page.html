@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Homepage</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="userEmail">User Email</h1> <!-- Update the ID to "userEmail" -->
+      <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >&times;</a
+        >
+        <a id="addItemLink" href="#">Add Item</a>
+        <a id="deleteItemLink" href="#">Delete Item</a>
+        <a id="reviewLink" href="#">Reviews</a>
+      </div>
+
+      <button class="openbtn" onclick="openNav()">&#9776; Menu</button>
+    </header>
+
+    <div class="card" id="totalOrders">
+      <h2>Current Order</h2>
+      <p>Loading...</p>
+    </div>
+
+    <div class="card" id="averageRating">
+      <h2>Average Rating</h2>
+      <p>Loading...</p>
+    </div>
+
+    <div class="card" id="topReviews">
+      <h2>Top Reviews</h2>
+      <p>Loading...</p>
+    </div>
+
+    <footer>&copy; 2024 Restaurant Name. All rights reserved.</footer>
+
+    <!-- Script to fetch and update dynamic data from API endpoints -->
+    <script>
+      // Assume you have API endpoints for fetching data
+      const restaurantNameEndpoint = "/api/restaurantName";
+      const totalOrdersEndpoint = "/api/totalOrders";
+      const averageRatingEndpoint = "/api/averageRating";
+      const topReviewsEndpoint = "/api/topReviews";
+      // Function to close the sidebar when the page is loaded
+      window.onload = function () {
+        closeNav();
+        displayUserEmail(); // Call the function to display user email
+      };
+
+      // Function to fetch data from API and update the respective card
+      const fetchDataAndUpdate = (endpoint, elementId) => {
+        fetch(endpoint)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(elementId).querySelector("p").innerText =
+              data.value;
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      };
+
+      // Fetch data and update elements
+      fetchDataAndUpdate(restaurantNameEndpoint, "restaurantName");
+      fetchDataAndUpdate(totalOrdersEndpoint, "totalOrders");
+      fetchDataAndUpdate(averageRatingEndpoint, "averageRating");
+      fetchDataAndUpdate(topReviewsEndpoint, "topReviews");
+
+      // Toggle menu function
+      function toggleMenu() {
+        const navbar = document.getElementById("navbar");
+        navbar.style.display =
+          navbar.style.display === "block" ? "none" : "block";
+      }
+
+      // Function to display user email
+      function displayUserEmail() {
+  var userEmail = sessionStorage.getItem('userEmail');
+  if (userEmail) {
+    var emailParts = userEmail.split('@'); // Split the email at '@'
+    if (emailParts.length > 0) {
+      document.getElementById('userEmail').innerText = emailParts[0]; // Set the part before '@'
+    } else {
+      document.getElementById('userEmail').innerText = userEmail; // Display full email if '@' is not found
+    }
+  } else {
+    console.error('User email not found in session storage');
+  }
+}
+
+      // Add event listener for "Add Items" link
+      document
+        .getElementById("addItemLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the default link behavior
+          window.location.href = "add_itemss.html"; // Navigate to the add items page
+        });
+
+      document
+        .getElementById("deleteItemLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the default link behavior
+          window.location.href = "delete_itemss.html";
+        });
+
+      document
+        .getElementById("reviewLink")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the default link behavior
+          window.location.href = "reviews.html";
+        });
+
+      /* Set the width of the sidebar to 250px (show it) */
+      function openNav() {
+        document.getElementById("mySidepanel").style.width = "250px";
+      }
+
+      /* Set the width of the sidebar to 0 (hide it) */
+      function closeNav() {
+        document.getElementById("mySidepanel").style.width = "0";
+      }
+    </script>
+  </body>
+</html>
